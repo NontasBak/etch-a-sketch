@@ -11,9 +11,12 @@ for(let i = 0; i < width; i++)
     for(let j = 0; j < height; j++)
     {
         boxes[i][j] = document.createElement("div");
-        //console.log(boxes[i][j]);
         boxes[i][j].classList.add("box");
-        //container.appendChild(boxes[i][j]);
+
+        boxes[i][j].addEventListener("mouseover", () => {
+            boxes[i][j].classList.add("color-box")
+        });
+
         rowContainer[i].appendChild(boxes[i][j]);
         container.appendChild(rowContainer[i]);
     }
@@ -21,6 +24,8 @@ for(let i = 0; i < width; i++)
 
 //console.table(boxes);
 console.log(container);
+
+
 
 
 
