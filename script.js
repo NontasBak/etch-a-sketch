@@ -1,31 +1,47 @@
-width = 16;
-height = 16;
-let boxes = new Array(height).fill(null).map(() => new Array(width).fill(null));
-const container = document.querySelector(".container");
+let dimension = 16;
+const body = document.querySelector("body");
+let container = document.createElement("div");
+container.classList.add("container");
 
-let rowContainer = [];
+createBoard(dimension);
+body.appendChild(container);
 
-for(let i = 0; i < width; i++)
-{   
-    rowContainer[i] = document.createElement("div");
-    for(let j = 0; j < height; j++)
+const button = document.createElement("button");
+button.addEventListener("click", () => {
+    dimension = prompt("Enter the number of rows/columns.")
+    if(dimension < 2 || dimension > 100)
     {
-        boxes[i][j] = document.createElement("div");
-        boxes[i][j].classList.add("box");
+        console.error("Invalid input");
+        alert("Input should be between 2 and 100");
+        return;
+    }
+    container.textContent = "";
+    createBoard(dimension);
+})
+button.textContent = "Change grid";
+body.appendChild(button);
 
-        boxes[i][j].addEventListener("mouseover", () => {
-            boxes[i][j].classList.add("color-box")
-        });
 
-        rowContainer[i].appendChild(boxes[i][j]);
-        container.appendChild(rowContainer[i]);
+
+function createBoard(dimension) {
+    for(let i = 0; i < dimension; i++)
+    {   
+        let rowContainer = document.createElement("div");
+
+        for(let j = 0; j < dimension; j++)
+        {
+            let square = document.createElement("div")
+            square.classList.add("square");
+
+            square.addEventListener("mouseover", () => {
+                square.classList.add("color-square")
+            });
+
+            rowContainer.appendChild(square);
+        }
+
+        container.appendChild(rowContainer);
     }
 }
-
-//console.table(boxes);
-console.log(container);
-
-
-
 
 
